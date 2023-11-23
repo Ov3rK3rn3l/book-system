@@ -1,0 +1,226 @@
+<Drawer.Body>
+                    <h3>{behavior === "create" ? "Criar novo" : "Atualizar"} Cliente </h3>
+                    <div className='row mt-3'>
+                        <div className='form-group col-12 mb-3'>
+                            <b>E-mail</b>
+                            <div className='input-group'>
+                                <input type='email' className='form-control' placeholder='E-mail do cliente' value={cliente.email}
+                                    onChange={(e) => setCliente('email', e.target.value)}
+                                />
+                                <div className='input-group-append'>
+                                    <Button appearance='primary' loading={form.filtering} disabled={form.filtering} onClick={() => {
+                                        dispatch(filterClientes())
+                                    }}
+                                    >Pesquisar</Button>
+                                </div>
+                            </div>
+                        </div>
+                        <div className='form-group col-6'>
+                            <b className=''>Nome</b>
+                            <input
+                                type="text"
+                                className='form-control'
+                                placeholder='Nome do Cliente'
+                                disabled={form.disabled}
+                                value={cliente.nome}
+                                onChange={(e) => setCliente('nome', e.target.value)}
+                            />
+                        </div>
+                        <div className='form-group col-6'>
+                            <b className=''>Telefone / Whatsapp</b>
+                            <input
+                                type="text"
+                                className='form-control'
+                                placeholder='Telefone / Whatsapp do Cliente'
+                                disabled={form.disabled}
+                                value={cliente.telefone}
+                                onChange={(e) => setCliente('telefone', e.target.value)}
+                            />
+                        </div>
+                        <div className='form-group col-6'>
+                            <b className=''>Data de Nascimento</b>
+                            <input
+                                type="date"
+                                className='form-control'
+                                disabled={form.disabled}
+                                value={cliente.dataNascimento}
+                                onChange={(e) => setCliente('dataNascimento', e.target.value)}
+                            />
+                        </div>
+                        <div className='form-group col-6'>
+                            <b className=''>Sexo</b>
+                            <select
+                                className='form-control'
+                                disabled={form.disabled}
+                                value={cliente.sexo}
+                                onChange={(e) => setCliente('sexo', e.target.value)}
+                            >
+                                <option value="M">Masculino</option>
+                                <option value="F">Feminino</option>
+                            </select>
+                        </div>
+
+                        <div className='form-group col-6'>
+                            <b>Tipo de Documento</b>
+                            <select
+                            disabled={form.disabled}
+                            className='form-control'
+                            value={cliente.documento.tipo}
+                            onChange={(e) => 
+                                setCliente('documento', {
+                                    ...cliente.documento,
+                                    tipo: e.target.value,
+                                })
+                            }   
+                            >
+                                <option value="cpf">CPF</option>
+                                <option value="cnpj">CNPJ</option>
+                            </select>
+                        </div>
+                        <div className='form-group col-6'>
+                            <b>Número do Documento</b>
+                            <input
+                            type="text"
+                            className='form-control'
+                            disabled={form.disabled}
+                            value={cliente.documento.numero}
+                            onChange={(e) =>
+                                setCliente('documento', {
+                                    ...cliente.documento,
+                                    numero: e.target.value,
+                                })
+                            }
+                            />
+                        </div>
+
+                        <div className='form-group col-3'>
+                            <b className=''>CEP</b>
+                            <input
+                            type="text"
+                            className='form-control'
+                            placeholder='Digite o CEP'
+                            disabled={form.disabled}
+                            value={cliente.endereco.cep}
+                            onChange={(e) => 
+                                setCliente('endereco', {
+                                    ...cliente.endereco,
+                                    cep: e.target.value,
+                                })
+                            }
+                            />
+                        </div>
+                        <div className='form-group col-6'>
+                            <b className=''>Rua / Logradouro</b>
+                            <input
+                            type="text"
+                            className='form-control'
+                            placeholder='Rua / Logradouro'
+                            disabled={form.disabled}
+                            value={cliente.endereco.logradouro}
+                            onChange={(e) => 
+                                setCliente('endereco', {
+                                    ...cliente.endereco,
+                                    logradouro: e.target.value,
+                                })
+                            }
+                            />
+                        </div>
+                        <div className='form-group col-3'>
+                            <b className=''>Número</b>
+                            <input
+                            type="text"
+                            className='form-control'
+                            placeholder='Número'
+                            disabled={form.disabled}
+                            value={cliente.endereco.numero}
+                            onChange={(e) => 
+                                setCliente('endereco', {
+                                    ...cliente.endereco,
+                                    numero: e.target.value,
+                                })
+                            }
+                            />
+                        </div>
+                        <div className='form-group col-3'>
+                            <b className=''>UF</b>
+                            <input
+                            type="text"
+                            className='form-control'
+                            placeholder='UF'
+                            disabled={form.disabled}
+                            value={cliente.endereco.uf}
+                            onChange={(e) => 
+                                setCliente('endereco', {
+                                    ...cliente.endereco,
+                                    uf: e.target.value,
+                                })
+                            }
+                            />
+                        </div>
+                        <div className='form-group col-9'>
+                                <b>Cidade</b>
+                                <input
+                                type="text"
+                                className='form-control'
+                                placeholder='Cidade'
+                                disabled={form.disabled}
+                                value={cliente.endereco.cidade}
+                                onChange={(e) =>
+                                    setCliente('endereco', {
+                                        cidade: e.target.value,
+                                    })
+                                }
+                                />
+                            </div>
+                    </div>
+                    <Button block className='mt-3'
+                    color={behavior === "create" ? "green" : "red"}
+                    size="lg" loading={form.saving}
+                    onClick={() => {
+                        if (behavior === "create") {
+                            save();
+                        } else {
+
+                        }
+                    }}
+                    >
+                        {behavior === "create" ? 'Salvar' : 'Remover'} Cliente
+                    </Button>
+                </Drawer.Body>
+
+
+
+
+
+                const INITIAL_STATE = {
+    behavior: 'create',
+    components: {
+        drawer: false,
+        confirmDelete: false,
+    },
+    form: {
+        filtering: false,
+        disable: true,
+        saving: false,
+    },
+    clientes: [],
+    cliente: {
+        email: '',
+        nome: '',
+        telefone: '',
+        dataNascimento: '',
+        sexo: 'M',
+        documento: {
+            tipo: 'cpf',
+            numero: '',
+        },
+        endereco: {
+            cidade: '',
+            uf: '',
+            cep: '',
+            logradouro: '',
+            numero: '',
+            pais: 'BR',
+        },
+    },
+};

@@ -1,0 +1,38 @@
+{
+    "salaoId": "65536296d57fe028bc427ee3",
+    "titulo": "Servico Testeer",
+    "preco": 20,
+    "comissao": 10,
+    "duracao": 30,
+    "descricao": "Descrição de teste",
+}
+
+
+Morning!
+
+Yes! I have one more issue. I'm not able to upload files to the bucket. I have S3 and IAM configured. However, I'm not sure if the privacy policy I set up is correct.
+
+Here is the privacy policy code:
+
+{
+    "Version": "2012-10-17",
+    "Statement": [
+        {
+            "Sid": "AddConnectAcl",
+            "Effect": "Allow",
+            "Principal": {
+                "AWS": "arn:aws:iam::106709855131:user/dev-plena"
+            },
+            "Action": [
+                "s3:PutObject",
+                "s3:PutObjectAcl"
+            ],
+            "Resource": "arn:aws:s3:::plena-dep/*",
+            "Condition": {
+                "StringEquals": {
+                    "s3:x-amz-acl": "public-read"
+                }
+            }
+        }
+    ]
+}
